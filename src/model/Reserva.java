@@ -3,8 +3,9 @@ package model;
 public class Reserva {
     private Leitor leitor;
     private Livro livro;
+    private int id;
 
-    public Reserva( Leitor leitor, Livro livro ){
+    public Reserva(Leitor leitor, Livro livro ){
         this.setLeitor(leitor);
         this.setLivro(livro);
         livro.setReserva(true);
@@ -24,6 +25,13 @@ public class Reserva {
 
     public void setLivro(Livro livro) {
         this.livro = livro;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
