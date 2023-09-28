@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 public class Emprestimo {
@@ -20,6 +21,7 @@ public class Emprestimo {
         this.situacao = true;
         this.dataEmprestimo = dataDeEmprestimo;
         this.dataDevolucao = dataDeDevolucao;
+        this.livro.setDisponilidadeEmprestimo(false);
 
     }
     @Override
@@ -72,6 +74,22 @@ public class Emprestimo {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void calcularMulta(LocalDate dataAtual){
+        int data = (int) ChronoUnit.DAYS.between(dataDevolucao, dataAtual); // subtrai a diferença entre as datas
+        if (data <= 0){
+            leitor.setMulta(leitor.getMulta());
+        }
+        else {
+            leitor.setMulta(leitor.getMulta() + (data * 2));
+
+        }
+    }
+    public void finalizarEmprestimo(LocalDate dataAtual){
+        this.situacao = false;
+        calcularMulta(dataAtual);
+        this.livro.setDisponilidadeEmprestimo(true);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package dao.emprestimo;
 
-import model.Bibliotecario;
-import model.Emprestimo;
+import model.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EmprestimoDAO implements EmprestimoDAOInterface{
     private ArrayList<Emprestimo> listEmprestimos;
@@ -54,4 +54,26 @@ public class EmprestimoDAO implements EmprestimoDAOInterface{
         }
         return null;
     }
+
+    @Override
+    public Emprestimo findEmprestimo(Leitor leitor, Livro livro) {
+        for (Emprestimo emprestimo: this.listEmprestimos){
+            if(emprestimo.getLeitor().equals(leitor) && emprestimo.getLivro().equals(livro) ) {
+                return emprestimo;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<Emprestimo> findByLeitor(Leitor leitor) {
+        List<Emprestimo> listEmprestimoLeitor = new ArrayList<>();
+        for(Emprestimo emprestimo: this.listEmprestimos){
+            if(emprestimo.getLeitor().equals(leitor)){
+                listEmprestimoLeitor.add(emprestimo);
+            }
+        }
+        return listEmprestimoLeitor;
+    }
+
 }

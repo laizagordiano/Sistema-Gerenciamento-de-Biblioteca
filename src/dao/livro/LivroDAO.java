@@ -57,5 +57,48 @@ public class LivroDAO implements LivroDAOInterface {
             }
         }
         return null;
+
+    }
+    @Override
+    public Livro findISBN(String isbn) throws Exception {
+        for (Livro livros : this.listLivros) {
+            if (livros.getIsbn().equals(isbn)) {
+                return livros;
+            }
+        }
+        return null;
+
+    }
+    @Override
+    public Livro findAutor(String autor) throws Exception {
+        for (Livro livros : this.listLivros) {
+            if (livros.getAutor().equals(autor)) {
+                return livros;
+            }
+        }
+        return null;
+
+    }
+
+    @Override
+    public Livro findCategoria(String categoria) throws Exception {
+        for (Livro livros : this.listLivros) {
+            if (livros.getCategoria().equals(categoria)) {
+                return livros;
+            }
+        }
+        return null;
+
+    }
+
+    @Override
+    public Livro findTitulo(String titulo) throws Exception {
+        for (Livro livros : this.listLivros) {
+            if (livros.getTitulo().equals(titulo)) {
+                return livros;
+            }
+        }
+        return null;
+
     }
 }
