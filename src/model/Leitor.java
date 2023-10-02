@@ -1,14 +1,22 @@
 package model;
+
+import dao.DAO;
+import exceptions.LeitorException;
+
+import java.time.LocalDate;
+
 public class Leitor extends Usuario {
     private int multa;
     private String endereco;
     private String telefone;
-    private boolean status;
+    private boolean status; // false = bloqueado, true = desbloqueado
+    private LocalDate fimDaMulta;
     public Leitor(String nome, String endereco, String telefone, String senha) {
-        super(nome, senha);
+        super(nome, senha, -1);
         this.endereco = endereco;
         this.telefone = telefone;
         this.status = true;
+        this.fimDaMulta = null;
     }
 
     public int getMulta() {
@@ -17,6 +25,14 @@ public class Leitor extends Usuario {
 
     public void setMulta(int multa) {
         this.multa = multa;
+    }
+
+    public LocalDate getFimDaMulta() {
+        return fimDaMulta;
+    }
+
+    public void setFimDaMulta(LocalDate fimDaMulta) {
+        this.fimDaMulta = fimDaMulta;
     }
 
     public String getEndereco() {
@@ -43,12 +59,17 @@ public class Leitor extends Usuario {
         this.status = status;
     }
 
-    public void bloquearLeitor(){
-        this.setStatus(false);
+    public Leitor bloquearLeitor(Leitor leitor) throws LeitorException {
+        leitor.setStatus(false);
+        DAO.getLeitorDAO().update(leitor);
+        return leitor;
     }
-    public void desbloquearLeitor(){
-        this.setStatus(true);
+    public Leitor desbloquearLeitor(Leitor leitor) throws LeitorException {
+        leitor.setStatus(true);
+        DAO.getLeitorDAO().update(leitor);
+        return leitor;
     }
+
 
     @Override
     public String toString() {
