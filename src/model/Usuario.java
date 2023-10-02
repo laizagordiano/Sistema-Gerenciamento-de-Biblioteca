@@ -7,9 +7,10 @@ public class Usuario {
     private int numeroID;
     private String senha;
 
-    public Usuario(String nome, String senha) {
+    public Usuario(String nome, String senha, int numeroID) {
         this.nome = nome;
         this.senha = senha;
+        this.numeroID = numeroID;
     }
 
 
@@ -35,6 +36,19 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return numeroID == usuario.numeroID;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numeroID);
     }
 }
 
