@@ -3,7 +3,7 @@ package model;
 public class Bibliotecario extends Usuario{
     private String cargo;
     public Bibliotecario(String nome, String senha, String cargo) {
-        super(nome, senha);
+        super(nome, senha,-1);
     }
 
     public String getCargo() {
@@ -11,6 +11,6 @@ public class Bibliotecario extends Usuario{
     }
 
     public void setCargo(String cargo) {
-        this.cargo = cargo;
+        this.cargo = "Bibliotecario";
     }
 }
