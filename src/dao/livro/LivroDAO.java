@@ -1,9 +1,10 @@
 package dao.livro;
 
-import model.Administrador;
+import exceptions.LivroException;
 import model.Livro;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class LivroDAO implements LivroDAOInterface {
     private ArrayList<Livro> listLivros;
@@ -20,13 +21,17 @@ public class LivroDAO implements LivroDAOInterface {
 
     @Override
     public Livro create(Livro obj) {
+        obj.setId(this.getProximoID());
         this.listLivros.add(obj);
         return obj;
     }
 
     @Override
-    public void delete(Livro obj) throws Exception {
-        this.listLivros.remove(obj);
+    public void delete(Livro obj) throws LivroException {
+        boolean deletou = this.listLivros.remove(obj);
+        if(!deletou){
+            throw new LivroException(LivroException.DELETAR);
+        }
     }
 
 
@@ -37,8 +42,11 @@ public class LivroDAO implements LivroDAOInterface {
     }
 
     @Override
-    public Livro update(Livro obj) throws Exception {
+    public Livro update(Livro obj) throws LivroException {
         int index = this.listLivros.indexOf(obj);
+        if (index == -1){
+            throw new LivroException(LivroException.ATUALIZAR);
+        }
         this.listLivros.set(index, obj);
         return obj;
     }
@@ -50,55 +58,67 @@ public class LivroDAO implements LivroDAOInterface {
 
 
     @Override
-    public Livro findById(int id) throws Exception {
-        for (Livro livros : this.listLivros) {
-            if (livros.getId() == id) {
+    public Livro findById(int id) throws LivroException {
+        for (Livro livros : listLivros) {
+            if (Objects.equals(livros.getId(), id)) {
                 return livros;
             }
         }
-        return null;
+        throw new LivroException(LivroException.PROCURAR);
 
     }
     @Override
-    public Livro findISBN(String isbn) throws Exception {
+    public ArrayList<Livro> findISBN(String isbn) throws LivroException {
+        ArrayList<Livro> listISBN = new ArrayList<>();
         for (Livro livros : this.listLivros) {
-            if (livros.getIsbn().equals(isbn)) {
-                return livros;
+            if (livros.getISBN().equals(isbn)) {
+                listISBN.add(livros);
             }
         }
-        return null;
-
+        if (listISBN.isEmpty()) {
+            throw new LivroException(LivroException.SEM_ISBN);
+        }
+        return listISBN;
     }
     @Override
-    public Livro findAutor(String autor) throws Exception {
+    public ArrayList<Livro> findAutor(String autor) throws LivroException {
+        ArrayList<Livro> listAutor = new ArrayList<>();
         for (Livro livros : this.listLivros) {
             if (livros.getAutor().equals(autor)) {
-                return livros;
+                listAutor.add(livros);
             }
         }
-        return null;
-
+        if (listAutor.isEmpty()) {
+            throw new LivroException(LivroException.SEM_AUTOR);
+        }
+        return listAutor;
     }
-
     @Override
-    public Livro findCategoria(String categoria) throws Exception {
+    public ArrayList<Livro> findCategoria(String categoria) throws LivroException {
+        ArrayList<Livro> listCategoria = new ArrayList<>();
         for (Livro livros : this.listLivros) {
             if (livros.getCategoria().equals(categoria)) {
-                return livros;
+                listCategoria.add(livros);
             }
         }
-        return null;
-
+        if (listCategoria.isEmpty()) {
+            throw new LivroException(LivroException.SEM_CATEGORIA);
+        }
+        return listCategoria;
     }
-
     @Override
-    public Livro findTitulo(String titulo) throws Exception {
+    public ArrayList<Livro> findTitulo(String titulo) throws LivroException {
+        ArrayList<Livro> listTitulos = new ArrayList<>();
         for (Livro livros : this.listLivros) {
             if (livros.getTitulo().equals(titulo)) {
-                return livros;
+                listTitulos.add(livros);
             }
         }
-        return null;
-
+        if (listTitulos.isEmpty()) {
+            throw new LivroException(LivroException.SEM_EXEMPLAR);
+        }
+        return listTitulos;
     }
+
 }
+
