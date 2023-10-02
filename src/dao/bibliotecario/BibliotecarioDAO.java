@@ -1,9 +1,11 @@
 package dao.bibliotecario;
 
+import exceptions.BibliotecarioException;
 import model.Administrador;
 import model.Bibliotecario;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class BibliotecarioDAO implements BibliotecarioDAOInterface{
     private ArrayList<Bibliotecario> listBibliotecarios;
@@ -17,13 +19,17 @@ public class BibliotecarioDAO implements BibliotecarioDAOInterface{
     }
     @Override
     public Bibliotecario create(Bibliotecario obj) {
+        obj.setNumeroID(this.getProximoID());
         this.listBibliotecarios.add(obj);
         return obj;
     }
 
     @Override
-    public void delete(Bibliotecario obj) throws Exception {
-        this.listBibliotecarios.remove(obj);
+    public void delete(Bibliotecario obj) throws BibliotecarioException {
+        boolean deletou = this.listBibliotecarios.remove(obj);
+        if (!deletou){
+            throw new BibliotecarioException(BibliotecarioException.DELETAR);
+        }
     }
 
     @Override
@@ -33,8 +39,11 @@ public class BibliotecarioDAO implements BibliotecarioDAOInterface{
     }
 
     @Override
-    public Bibliotecario update(Bibliotecario obj) throws Exception {
+    public Bibliotecario update(Bibliotecario obj) throws BibliotecarioException {
         int index = this.listBibliotecarios.indexOf(obj);
+        if (index == -1){
+            throw new BibliotecarioException(BibliotecarioException.ATUALIZAR);
+        }
         this.listBibliotecarios.set(index, obj);
         return obj;
     }
@@ -45,12 +54,12 @@ public class BibliotecarioDAO implements BibliotecarioDAOInterface{
     }
 
     @Override
-    public Bibliotecario findById(int id) throws Exception {
-        for (Bibliotecario bibliotecario : this.listBibliotecarios) {
-            if (bibliotecario.getNumeroID() == id) {
+    public Bibliotecario findById(int id) throws BibliotecarioException {
+        for (Bibliotecario bibliotecario : listBibliotecarios) {
+            if (Objects.equals(bibliotecario.getNumeroID(),id)) {
                 return bibliotecario;
             }
         }
-        return null;
+        throw new BibliotecarioException(BibliotecarioException.PROCURAR);
     }
 }

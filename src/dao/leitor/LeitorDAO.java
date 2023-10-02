@@ -1,8 +1,10 @@
 package dao.leitor;
 
+import exceptions.LeitorException;
 import model.Leitor;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class LeitorDAO implements LeitorDAOInterface{
     private ArrayList<Leitor> listLeitor;
@@ -16,13 +18,17 @@ public class LeitorDAO implements LeitorDAOInterface{
     }
     @Override
     public Leitor create(Leitor obj) {
+        obj.setNumeroID(this.getProximoID());
         this.listLeitor.add(obj);
         return obj;
     }
 
     @Override
-    public void delete(Leitor obj) throws Exception {
-        this.listLeitor.remove(obj);
+    public void delete(Leitor obj) throws LeitorException {
+        boolean deletou = this.listLeitor.remove(obj);
+        if (!deletou){
+            throw new LeitorException(LeitorException.DELETAR);
+        }
     }
 
     @Override
@@ -33,8 +39,11 @@ public class LeitorDAO implements LeitorDAOInterface{
     }
 
     @Override
-    public Leitor update(Leitor obj) throws Exception {
+    public Leitor update(Leitor obj) throws LeitorException {
         int index = this.listLeitor.indexOf(obj);
+        if (index == -1){
+            throw new LeitorException(LeitorException.ATUALIZAR);
+        }
         this.listLeitor.set(index, obj);
         return obj;
     }
@@ -45,13 +54,14 @@ public class LeitorDAO implements LeitorDAOInterface{
     }
 
     @Override
-    public Leitor findById(int id) throws Exception {
-        for (Leitor leitor : this.listLeitor) {
-            if (leitor.getNumeroID() == id) {
+    public Leitor findById(int id) throws LeitorException {
+        for (Leitor leitor : listLeitor) {
+            if (Objects.equals(leitor.getNumeroID(), id)) {
                 return leitor;
             }
         }
-        return null;
+        throw new LeitorException(LeitorException.PROCURAR);
     }
+
 }
 
