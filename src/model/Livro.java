@@ -6,25 +6,27 @@ public class Livro {
     private String titulo;
     private String autor;
     private String editora;
-    private String isbn;
+    private String ISBN;
     private Integer anoPublicacao;
     private boolean disponilidadeEmprestimo;
     private boolean reserva;
     private String categoria;
     private int id;
+    private String localizacao;
 
-    public Livro(String titulo, String autor, String editora, String isbn, Integer anoPublicacao, String categoria) {
+    public Livro(String titulo, String autor, String editora, String ISBN, Integer anoPublicacao, String categoria, String localizacao) {
         this.titulo = titulo;
         this.autor = autor;
         this.editora = editora;
-        this.isbn = isbn;
+        this.ISBN = ISBN;
         this.anoPublicacao = anoPublicacao;
         this.disponilidadeEmprestimo = true;
         this.reserva = false;
         this.categoria = categoria;
+        this.localizacao = localizacao;
     }
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(id);
     }
     public String getTitulo() {
         return titulo;
@@ -50,12 +52,20 @@ public class Livro {
         this.editora = editora;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public String getLocalizacao() {
+        return localizacao;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setLocalizacao(String localizacao) {
+        this.localizacao = localizacao;
+    }
+
+    public String getISBN() {
+        return ISBN;
+    }
+
+    public void setISBN(String ISBN) {
+        this.ISBN = ISBN;
     }
 
     public Integer getAnoPublicacao() {
@@ -103,13 +113,14 @@ public class Livro {
                 "titulo='" + titulo + '\'' +
                 ", autor='" + autor + '\'' +
                 ", editora='" + editora + '\'' +
-                ", isbn=" + isbn +
+                ", ISBN='" + ISBN + '\'' +
                 ", anoPublicacao=" + anoPublicacao +
                 ", disponilidadeEmprestimo=" + disponilidadeEmprestimo +
                 ", reserva=" + reserva +
                 ", categoria='" + categoria + '\'' +
+                ", id=" + id +
+                ", localizacao='" + localizacao + '\'' +
                 '}';
     }
-
-
 }
+
