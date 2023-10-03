@@ -16,6 +16,22 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Essa classe é responsavél por realizar os testes das operações do DAO da classe EmprestimoModel.
+ * @author Laiza Araujo Gordiano Oliveira
+ * @see dao.DAO
+ * @see exceptions.EmprestimoException
+ * @see exceptions.LeitorException
+ * @see exceptions.LivroException
+ * @see java.time.format.DateTimeFormatter
+ * @see model.Emprestimo
+ * @see model.Leitor
+ * @see model.Livro
+ * @see java.time.LocalDate
+ * @see org.junit.jupiter.api.AfterEach
+ * @see org.junit.jupiter.api.BeforeEach
+ * @see org.junit.jupiter.api.Test
+ */
 public class EmprestimoModelTest {
     Leitor bia;
     Livro livro1;
@@ -23,7 +39,10 @@ public class EmprestimoModelTest {
     Livro livro3;
     Livro livro4;
     Emprestimo emprestimo1;
-
+    /**
+     * Esse método é utilizado para configurar o ambiente de teste antes da execução de cada teste.
+     * @throws Exception
+     */
     @BeforeEach
     void setUp() throws Exception {
         bia = DAO.getLeitorDAO().create(new Leitor("Bia", "Rua A,12 - Feira VI", "75988622311", "452361"));
@@ -33,6 +52,11 @@ public class EmprestimoModelTest {
         livro4 = DAO.getLivroDAO().create(new Livro("A pequena Sereia"," Antoine de Saint-Exupéry","Companhia das Letras","1100",2000,"Contos","156"));
         emprestimo1 = DAO.getEmprestimoDAO().create(new Emprestimo(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), bia, livro1));
     }
+    /**
+     *  Esse método é utilizado para limpar o ambiente de teste após a execução de cada teste.
+     *  Ele deleta todos os registros de empréstimos criados durante os testes.
+     * @throws Exception
+     */
     @AfterEach
         void tearDown(){
         DAO.getLeitorDAO().deleteMany();
@@ -40,17 +64,33 @@ public class EmprestimoModelTest {
         DAO.getEmprestimoDAO().deleteMany();
 
     }
+
+    /**
+     * Esse teste verifica se o método calcularMulta funciona corretamente.
+     * @throws LeitorException
+     */
     @Test
     void calcularMulta() throws LeitorException {
         emprestimo1.calcularMulta(LocalDate.now().plusDays(8));
         bia = DAO.getLeitorDAO().findById(0);
         assertEquals(2,bia.getMulta());
     }
+
+    /**
+     * Esse teste verifica se a operação finalizar emprestimo funciona corretamente.
+     * @throws LivroException
+     * @throws LeitorException
+     */
     @Test
     void finalizarEmprestimo() throws LivroException, LeitorException {
         emprestimo1.finalizarEmprestimo(LocalDate.now().plusDays(1));
         assertFalse(emprestimo1.isSituacao());
     }
+
+    /**
+     * Esse teste verifica se a exceção é lançada quando o limite de renovação é atingido.
+     * @throws Exception
+     */
     @Test
     void failLimiteRenovacao() throws Exception {
         emprestimo1.renovarEmprestimo(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
@@ -62,6 +102,11 @@ public class EmprestimoModelTest {
             assertEquals(EmprestimoException.LIMITE, e.getMessage());
         }
     }
+
+    /**
+     * Esse teste verifica se a exceção é lançada quando a situação do leitor é false.
+     * @throws Exception
+     */
     @Test
     void failSituaofalse() throws Exception {
         bia.setStatus(false);
@@ -75,6 +120,11 @@ public class EmprestimoModelTest {
         }
 
     }
+
+    /**
+     * Esse teste verifica se a exceção é lançada quando existem reservas e o leitor não é o primeiro da lista.
+     * @throws Exception
+     */
     @Test
     void failHaReservas() throws Exception{
         Leitor leitor1 = DAO.getLeitorDAO().create(new Leitor("João", "Conceição", "11 22222", "0232"));
@@ -89,6 +139,11 @@ public class EmprestimoModelTest {
         }
 
     }
+
+    /**
+     * Esse teste verifica se a exceção é lançada quando o leitor ainda está multado.
+     * @throws Exception
+     */
     @Test
     void failValidaFimDaMulta() throws Exception {
         emprestimo1.calcularMulta(LocalDate.now().plusDays(8));
@@ -103,6 +158,11 @@ public class EmprestimoModelTest {
         }
 
     }
+
+    /**
+     * Esse teste verifica se a operação de renovar emprestimo funciona corretamente.
+     * @throws Exception
+     */
     @Test
     void renovaremprestimo() throws Exception {
         emprestimo1 = DAO.getEmprestimoDAO().create(new Emprestimo(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), bia, livro1));
@@ -110,6 +170,10 @@ public class EmprestimoModelTest {
         assertEquals(emprestimo1.getRenovou(),1);
     }
 
+    /**
+     * Esse teste verifica se a exceção é lançada quando o leitor está multado e não pode fazer o emprestimo.
+     * @throws Exception
+     */
     @Test
     void failEmprestimoConstrutorLeitorMultado() throws Exception {
         emprestimo1.calcularMulta(LocalDate.now().plusDays(8));
@@ -122,6 +186,11 @@ public class EmprestimoModelTest {
             assertEquals(LeitorException.MULTADO,e.getMessage());
         }
     }
+
+    /**
+     * Esse teste verifica se a exceção é lançada quando o leitor atinge o limite de livros a serem emprestados.
+     * @throws Exception
+     */
     @Test
     void failEmprestimoConstrutorLimiteDeLivros() throws Exception {
         DAO.getEmprestimoDAO().create(new Emprestimo(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),bia,livro1));
@@ -134,6 +203,11 @@ public class EmprestimoModelTest {
             assertEquals(LeitorException.LIMITE,e.getMessage());
         }
     }
+
+    /**
+     * Esse teste verifica se a excção é lançada quando o livro não está disponivel para emprestimo.
+     * @throws Exception
+     */
     @Test
     void failDisponibilidadeLivro() throws Exception {
         livro1.setDisponilidadeEmprestimo(false);

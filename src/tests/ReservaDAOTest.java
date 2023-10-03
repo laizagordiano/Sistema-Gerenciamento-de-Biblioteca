@@ -14,7 +14,21 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Essa classe é responsavél por realizar os testes das operações do DAO da classe ReservaDAO.
+ * @author Laiza Araujo Gordiano Oliveira
+ * @see dao.DAO
+ * @see exceptions.LeitorException
+ * @see exceptions.LivroException
+ * @see exceptions.ReservaException
+ * @see model.Reserva
+ * @see model.Leitor
+ * @see model.Livro
+ * @see java.util.ArrayList
+ * @see org.junit.jupiter.api.AfterEach
+ * @see org.junit.jupiter.api.BeforeEach
+ * @see org.junit.jupiter.api.Test
+ */
 public class ReservaDAOTest {
     private Leitor leitor1;
     private Leitor leitor2;
@@ -23,6 +37,10 @@ public class ReservaDAOTest {
     private Reserva reserva1;
     private Reserva reserva2;
     private Reserva semReserva;
+    /**
+     * Esse método é utilizado para configurar o ambiente de teste antes da execução de cada teste.
+     * @throws Exception
+     */
 
     @BeforeEach
     void setUp(){
@@ -35,12 +53,24 @@ public class ReservaDAOTest {
         semReserva = new Reserva(leitor2, livro2);
         semReserva.setId(15);
     }
+    /**
+     * Esse método é utilizado para limpar o ambiente de teste após a execução de cada teste.
+     * Ele deleta todos os registros de reservas criadas durante os testes.
+     * @throws Exception
+     */
     @AfterEach
     void tearDown(){
         DAO.getLeitorDAO().deleteMany();
         DAO.getLivroDAO().deleteMany();
         DAO.getReservaDAO().deleteMany();
     }
+    /**
+     * Este método testa a criação de um novo registro de Reserva,
+     * ele cria uma nova reserva e armazena o resultado da criação.
+     * Obtém a reserva esperada com base no ID.
+     * Verifica se a resrerva criada é o esperado.
+     * @throws Exception
+     */
 
     @Test
     void create() throws ReservaException,LivroException, LeitorException {
@@ -50,6 +80,9 @@ public class ReservaDAOTest {
         assertEquals(esperado,atual,"Esse teste deveria passar!");
         assertNotNull(esperado,"Esse teste deveria passar!");
     }
+    /**
+     * Esse teste verifica se a exceção é passada corretamente após não conseguir deletar uma reserva.
+     */
     @Test
     void failDelete(){
         try{
@@ -60,17 +93,26 @@ public class ReservaDAOTest {
             assertEquals(ReservaException.DELETAR,e.getMessage());
         }
     }
+    /**
+     * Esse teste verifica se o método consegue deletar a reserva.
+     * @throws LivroException
+     */
     @Test
     void delete() throws ReservaException {
         DAO.getReservaDAO().delete(reserva1);
         assertEquals(DAO.getReservaDAO().findMany().size(),1);
     }
-
+    /**
+     * Esse teste verifica se a operação deleta todas as reservas.
+     */
     @Test
     void deleteMany(){
         DAO.getReservaDAO().deleteMany();
         assertEquals(DAO.getReservaDAO().findMany().size(),0);
     }
+    /**
+     * Esse teste verifica se a exceção é passada corretamente, após não coonseguir atualizar uma reserva.
+     */
     @Test
     void failUpdate(){
         try{
@@ -80,6 +122,9 @@ public class ReservaDAOTest {
             assertEquals(LivroException.ATUALIZAR,e.getMessage());
         }
     }
+    /**
+     * Esse teste verifica se a operação de atualizar a reserva funciona corretamente.
+     */
     @Test
     void update() throws  ReservaException {
         reserva1.setLeitor(leitor1);
@@ -87,11 +132,17 @@ public class ReservaDAOTest {
         Reserva atualizado = DAO.getReservaDAO().update(reserva1);
         assertEquals(atualizado, reserva1);
     }
+    /**
+     * Esse teste verifica se o método consegue encontar todods as reservas.
+     */
     @Test
     void findMAny(){
         ArrayList<Reserva> todasAsReservas= DAO.getReservaDAO().findMany();
         assertEquals(todasAsReservas.size(),2);
     }
+    /**
+     * Esse teste verifica se a exceção é lançada corretamente quando da erro na procura por ID.
+     */
     @Test
     void failFindById(){
         try{
@@ -101,30 +152,52 @@ public class ReservaDAOTest {
             assertEquals(ReservaException.PROCURAR,e.getMessage());
         }
     }
-
+    /**
+     * Este teste verifica se a operação de busca de uma reserva pelo ID funciona corretamente.
+     * @throws LivroException
+     */
     @Test
     void findById() throws ReservaException {
         Reserva econtrada = DAO.getReservaDAO().findById(1);
         assertEquals(econtrada, reserva2);
     }
+
+    /**
+     * Esse teste verifica se é encontrado reservas.
+     */
     @Test
     void findReservas(){
         assertEquals(reserva1,DAO.getReservaDAO().findReservas(leitor1,livro1));
     }
 
+    /**
+     * Esse teste verifica se a operação de encontrar o leitor na reserva está correta.
+     */
     @Test
     void findLeitornaReserva(){
         assertEquals(reserva1,DAO.getReservaDAO().findLeitorNaReserva(leitor1));
     }
+
+    /**
+     * Esse teste verifica se a operação de encontrar o leitor sendo o primeiro da lista de reservas funciona.
+     */
     @Test
     void primeiroLeitor(){
         assertTrue(DAO.getReservaDAO().primeiroLeitor(leitor1));
         assertFalse(DAO.getReservaDAO().primeiroLeitor(leitor2));
     }
+
+    /**
+     * Esse teste verifica se a operação de encontrar o número de reservados funciona.
+     */
     @Test
     void numReservados(){
         assertEquals(2,DAO.getReservaDAO().numReservados());
     }
+
+    /**
+     * Esse teste verifica se a operação de encontrar se existem reservas funciona.
+     */
     @Test
     void haReservas(){
         assertTrue(DAO.getReservaDAO().haReservas());
