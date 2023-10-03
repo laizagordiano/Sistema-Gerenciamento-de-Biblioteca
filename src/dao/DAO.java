@@ -7,8 +7,12 @@ import dao.emprestimo.EmprestimoDAO;
 import dao.leitor.LeitorDAO;
 import dao.livro.LivroDAO;
 import dao.reserva.ReservaDAO;
-import dao.usuario.UsuarioDAO;
-
+/**
+ * Classe responsável por implementar o Padrão Singleton tem como definição garantir que uma classe,
+ * tenha apenas uma instância de si mesma e que forneça um ponto global de acesso a ela;
+ *
+ * @author Laiza Araujo Gordiano Oliveira
+ */
 public class DAO {
     private static AdministradorDAO administradorDAOinstancia;
     private static BibliotecarioDAO bibliotecarioDAOinstancia;
