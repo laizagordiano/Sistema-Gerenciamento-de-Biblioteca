@@ -1,7 +1,11 @@
 package exceptions;
 
 import model.Reserva;
-
+/**
+ * Esta classe é responsável por lidar com exceções relacionadas ao objeto Reserva.
+ * Ela estende a classe Exception, proporcionando meios de capturar e tratar erros específicos.
+ * A classe possui mensagens padrão para diversas operações (deletar, atualizar, procurar, etc.).
+ */
 public class ReservaException extends Exception {
     private Reserva reserva;
 

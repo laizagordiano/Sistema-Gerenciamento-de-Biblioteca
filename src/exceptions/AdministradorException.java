@@ -1,8 +1,11 @@
 package exceptions;
 
 import model.Administrador;
-/** Esta classe é responsável pelas exceções relacionadas ao Administrador
- **/
+/** Esta classe é responsável por lidar com exceções relacionadas ao objeto Administrador.
+ * Ela estende a classe Exception, proporcionando meios de capturar e tratar erros específicos.
+ * A classe possui três mensagens padrão para diferentes operações (deletar, atualizar, procurar).
+ */
+
 public class AdministradorException extends Exception{
     private Administrador administrador;
     public static final String DELETAR = "Operação de exclusão não realizada";

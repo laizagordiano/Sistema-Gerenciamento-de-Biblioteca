@@ -3,6 +3,10 @@ package exceptions;
 import model.Emprestimo;
 import model.Livro;
 
+/** Esta classe é responsável por lidar com exceções relacionadas ao objeto Empréstimo.
+ * Ela estende a classe Exception, proporcionando meios de capturar e tratar erros específicos.
+ * A classe possui mensagens padrão para diversas operações.
+ */
 public class EmprestimoException extends Exception{
     private Emprestimo emprestimo;
     public static final String EMPRESTAR = "Operação de emprestimo não realizada";

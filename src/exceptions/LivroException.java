@@ -1,7 +1,11 @@
 package exceptions;
 
 import model.Livro;
-
+/**
+ * Esta classe é responsável por lidar com exceções relacionadas ao objeto Livro.
+ * Ela estende a classe Exception, proporcionando meios de capturar e tratar erros específicos.
+ * A classe possui mensagens padrão para diversas operações (deletar, atualizar, procurar, etc.).
+ */
 public class LivroException extends Exception{
     private Livro livro;
     public static final String DELETAR = "Operação de exclusão não realizada";

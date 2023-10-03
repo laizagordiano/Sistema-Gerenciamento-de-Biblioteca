@@ -2,6 +2,11 @@ package exceptions;
 
 
 import model.Leitor;
+/**
+ * Esta classe é responsável por lidar com exceções relacionadas ao objeto Leitor.
+ * Ela estende a classe Exception, proporcionando meios de capturar e tratar erros específicos.
+ * A classe possui mensagens padrão para diversas operações (deletar, atualizar, procurar, etc.).
+ */
 
 public class LeitorException extends Exception{
     private Leitor leitor;
