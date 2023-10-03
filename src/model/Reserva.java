@@ -2,6 +2,11 @@ package model;
 
 import java.util.Objects;
 
+/**
+ * Essa classe é responsável pelas iformações passadas na criação das reservas.
+ * @author Laiza Araujo Gordiano Oliveira
+ * @see java.util.Objects
+ */
 public class Reserva {
     private Leitor leitor;
     private Livro livro;

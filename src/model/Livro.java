@@ -2,6 +2,11 @@ package model;
 
 import java.util.Objects;
 
+/**
+ * Essa classe é responsável pelas informações na criação de um livro.
+ * @author Laiza Araujo Gordiano Oliveira
+ * @see java.util.Objects
+ */
 public class Livro {
     private String titulo;
     private String autor;

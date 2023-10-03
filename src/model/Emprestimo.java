@@ -14,6 +14,24 @@ import java.util.Objects;
 
 import static dao.DAO.getReservaDAO;
 
+/**
+ * Esta classe é responsável por registrar um empréstimo contendo as informações:
+ * Data de emprestimo
+ * Data de devolução
+ * Leitor
+ * Livro
+ * Id
+ * @author Laiza Araujo Gordiano Oliveira
+ * @see exceptions.EmprestimoException
+ * @see exceptions.LeitorException
+ * @see exceptions.LivroException
+ * @see exceptions.ReservaException
+ * @see java.time.LocalDate
+ * @see java.time.Period
+ * @see java.time.format.DateTimeFormatter
+ * @see java.time.temporal.ChronoUnit
+ * @see java.util.Objects
+ */
 public class Emprestimo {
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
@@ -110,6 +128,12 @@ public class Emprestimo {
         this.renovou = renovou;
     }
 
+    /**
+     * Esse método é responsavél por calcular a multa do usuario dobrando
+     * o valor de dias de atraso após a data de devolução.
+     * @param dataAtual
+     * @throws LeitorException
+     */
     public void calcularMulta(LocalDate dataAtual) throws LeitorException {
         int data = (int) ChronoUnit.DAYS.between(dataDevolucao, dataAtual); // subtrai a diferença entre as datas
         if (data <= 0){
@@ -122,6 +146,15 @@ public class Emprestimo {
             DAO.getLeitorDAO().update(leitor);
         }
     }
+
+    /**
+     * Esse método é responsável por finalizar o emprestimo do usuário,
+     * fazendo um set na situação para indicar que o emprestimo foi finalizado,
+     * e devolvendo o livro do emprestimo (alterando sua disponibilidade para true).
+     * @param dataAtual
+     * @throws LivroException
+     * @throws LeitorException
+     */
     public void finalizarEmprestimo(LocalDate dataAtual) throws LivroException, LeitorException {
         this.situacao = false;
         calcularMulta(dataAtual);
@@ -130,7 +163,16 @@ public class Emprestimo {
 
     }
 
-
+    /**
+     * Esse método é responsável pela renovação do emprestimo,
+     * atendendo aos requisitos necessarios para fazer a renovação, como:
+     * Ainda não ter renovado;
+     * Não estar bloqueado;
+     * Que não tenha reservas para o livro, mas se existir, o leitor precisa ser o primeiro na lista de reservas;
+     * Não estar multado.
+     * @param datAtual
+     * @throws Exception
+     */
     public void renovarEmprestimo( String datAtual) throws Exception {
         if (this.renovou >= 1){
             throw new EmprestimoException(EmprestimoException.LIMITE);

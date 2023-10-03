@@ -5,6 +5,17 @@ import exceptions.LeitorException;
 
 import java.time.LocalDate;
 
+/**
+ * Essa classe é responsável por criar o Leitor contendo algumas informações, como:
+ * Nome;
+ * Endereço;
+ * Telefone;
+ * Senha.
+ * @author Laiza Araujo Gordiano Oliveira
+ * @see dao.DAO
+ * @see exceptions.LeitorException
+ * @see java.time.LocalDate
+ */
 public class Leitor extends Usuario {
     private int multa;
     private String endereco;
@@ -59,11 +70,24 @@ public class Leitor extends Usuario {
         this.status = status;
     }
 
+    /**
+     * Esse método é responsável por bloquear o leitor, alterando o seu status para false.
+     * @param leitor
+     * @return
+     * @throws LeitorException
+     */
     public Leitor bloquearLeitor(Leitor leitor) throws LeitorException {
         leitor.setStatus(false);
         DAO.getLeitorDAO().update(leitor);
         return leitor;
     }
+
+    /**
+     * Esse método é responsável por desbloquear o leitor, alterando o seu status para true.
+     * @param leitor
+     * @return
+     * @throws LeitorException
+     */
     public Leitor desbloquearLeitor(Leitor leitor) throws LeitorException {
         leitor.setStatus(true);
         DAO.getLeitorDAO().update(leitor);

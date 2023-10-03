@@ -2,6 +2,11 @@ package model;
 
 import java.util.Objects;
 
+/**
+ * Essa classe é responsável por extender atributos para o Administrador, Bibliotecario e Leitor;
+ * @author Laiza Araujo Gordiano Oliveira
+ * @see java.util.Objects
+ */
 public class Usuario {
     private String nome;
     private int numeroID;
