@@ -63,7 +63,6 @@ public class EmprestimoDAOTest {
         emprestimo1 = DAO.getEmprestimoDAO().create(new Emprestimo(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),bia, livro1));
         emprestimo2 = DAO.getEmprestimoDAO().create(new Emprestimo(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),lucas,livro2));
         emprestimo3 = DAO.getEmprestimoDAO().create(new Emprestimo(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),antonio, livro1));
-        livro2.setId(12);
     }
     /**
      *  Esse método é utilizado para limpar o ambiente de teste após a execução de cada teste.
@@ -89,8 +88,8 @@ public class EmprestimoDAOTest {
     @Test
    void create() throws Exception {
        Emprestimo expectedEmprestimo = DAO.getEmprestimoDAO().create(new Emprestimo("19/09/2023",antonio, livro2));
-        Emprestimo actualEmprestimo = DAO.getEmprestimoDAO().findById(3);
-        assertEquals(expectedEmprestimo,actualEmprestimo,"Esse teste deveria passar!");
+       Emprestimo actualEmprestimo = DAO.getEmprestimoDAO().findById(3);
+       assertEquals(expectedEmprestimo,actualEmprestimo,"Esse teste deveria passar!");
 
     }
 
@@ -158,24 +157,6 @@ public class EmprestimoDAOTest {
     void findById() throws Exception{
         Emprestimo atual = DAO.getEmprestimoDAO().findById(0);
         assertEquals(emprestimo1,atual,"Esse teste deveria passar!");
-    }
-
-    /**
-     * Este teste verifica se a operação de contagem de empréstimos atrasados funciona corretamente.
-     * Modifica a data de devolução do Empréstimo 'emprestimo1' para um dia antes da data atual, utilizando o
-     * método minusDays() da classe LocalDate.
-     * Isso é feito para forçar uma situação de atraso.
-     * Utiliza o método numLivrosAtrasados() do DAO para obter o número de empréstimos atrasados e,
-     * em seguida, verifica se o número retornado é o mesmo que o esperado.
-     * @throws EmprestimoException
-     */
-    @Test
-    void atrasados() throws EmprestimoException {
-        emprestimo1.setDataDevolucao(LocalDate.now().minusDays(1));
-        int atrasou = DAO.getEmprestimoDAO().numLivrosAtrasados();
-        int esperado = 1;
-        assertEquals(esperado,atrasou,"Esse teste deveria passar!");
-
     }
 
     /**
@@ -272,11 +253,11 @@ public class EmprestimoDAOTest {
      * @throws Exception
      */
     @Test
-    void vericaAtrasoUsuario() throws Exception {
-        assertFalse(DAO.getEmprestimoDAO().verificaAtrasoDoLeitor(bia));
+    void vericaAtrasoLeitor() throws Exception {
+        assertFalse(DAO.getEmprestimoDAO().verificaAtrasoDoLeitor(bia,LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
         emprestimo1.setDataDevolucao(LocalDate.now().minusDays(1));
         DAO.getEmprestimoDAO().update(emprestimo1);
-        assertTrue(DAO.getEmprestimoDAO().verificaAtrasoDoLeitor(bia));
+        assertTrue(DAO.getEmprestimoDAO().verificaAtrasoDoLeitor(bia,LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
     }
 
     /**
@@ -293,6 +274,7 @@ public class EmprestimoDAOTest {
     @Test
     void numLivrosAtrasados() throws EmprestimoException {
         emprestimo1.setDataDevolucao(LocalDate.now().minusDays(1));
+        DAO.getEmprestimoDAO().update(emprestimo1);
         assertEquals(1,DAO.getEmprestimoDAO().numLivrosAtrasados());
     }
 
@@ -308,7 +290,7 @@ public class EmprestimoDAOTest {
     void livroMaisPopular() throws LivroException,LeitorException, ReservaException, EmprestimoException {
         ArrayList<Livro> livrosMaisPopulares = DAO.getEmprestimoDAO().livrosMaisPolulares();
         assertEquals(livrosMaisPopulares.size(),1);
-        livro2.setDisponilidadeEmprestimo(true);
+        livro2.setDisponibilidadeEmprestimo(true);
         DAO.getLivroDAO().update(livro2);
         DAO.getEmprestimoDAO().create(new Emprestimo(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),bia,livro2));
         ArrayList<Livro> livrosMaisPopulares2 = DAO.getEmprestimoDAO().livrosMaisPolulares();

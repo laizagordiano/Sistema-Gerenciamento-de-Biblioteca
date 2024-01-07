@@ -1,6 +1,7 @@
 package dao.livro;
 
 import dao.CRUD;
+import exceptions.LivroException;
 import model.Livro;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public interface LivroDAOInterface extends CRUD<Livro, Exception> {
      * @return
      * @throws Exception
      */
-    public ArrayList<Livro> findISBN(String isbn) throws Exception;
+    public ArrayList<Livro> findISBN(String isbn) throws LivroException;
 
     /**
      * Esse método tem como objetivo encontrar e retornar uma lista de livros que têm um autor específico.
@@ -28,7 +29,7 @@ public interface LivroDAOInterface extends CRUD<Livro, Exception> {
      * @return
      * @throws Exception
      */
-    public ArrayList<Livro> findAutor(String autor) throws Exception;
+    public ArrayList<Livro> findAutor(String autor) throws LivroException;
 
     /**
      * Esse método tem como objetivo encontrar e retornar uma lista de livros que têm uma categoria específica.
@@ -36,7 +37,7 @@ public interface LivroDAOInterface extends CRUD<Livro, Exception> {
      * @return
      * @throws Exception
      */
-    public ArrayList<Livro> findCategoria(String categoria) throws Exception;
+    public ArrayList<Livro> findCategoria(String categoria) throws LivroException;
 
     /**
      * Esse método tem como objetivo encontrar e retornar uma lista de livros que têm um título específico
@@ -44,6 +45,6 @@ public interface LivroDAOInterface extends CRUD<Livro, Exception> {
      * @return
      * @throws Exception
      */
-    public ArrayList<Livro> findTitulo(String titulo) throws Exception;
+    public ArrayList<Livro> findTitulo(String titulo) throws LivroException;
 
 }

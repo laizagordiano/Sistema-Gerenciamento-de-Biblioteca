@@ -6,6 +6,7 @@ import exceptions.LeitorException;
 import exceptions.LivroException;
 import exceptions.ReservaException;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -32,7 +33,7 @@ import static dao.DAO.getReservaDAO;
  * @see java.time.temporal.ChronoUnit
  * @see java.util.Objects
  */
-public class Emprestimo {
+public class Emprestimo implements Serializable {
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
     private Leitor leitor;
@@ -48,7 +49,7 @@ public class Emprestimo {
         else{
             throw new LeitorException(LeitorException.MULTADO);
         }
-        if (livro.getDisponilidadeEmprestimo()){
+        if (livro.getDisponibilidadeEmprestimo()){
             this.livro = livro;
         }
         else{
@@ -57,18 +58,32 @@ public class Emprestimo {
         if (DAO.getEmprestimoDAO().findActiveUser(leitor).size() > 3){
             throw new LeitorException(LeitorException.LIMITE);
         }
-
+        if(DAO.getEmprestimoDAO().verificaAtrasoDoLeitor(leitor, dataDoEmprestimo)){
+            throw new EmprestimoException(EmprestimoException.LEITOR_COM_ATRASO);
+        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         this.dataEmprestimo = LocalDate.parse(dataDoEmprestimo, formatter);
         this.dataDevolucao = dataEmprestimo.plus(Period.ofDays(7));
         this.situacao = true;
         this.renovou = 0;
+        this.id = -1;
+        livro.setDisponibilidadeEmprestimo(true);
         DAO.getLivroDAO().update(livro);
+        //DAO.getLeitorDAO().update(leitor);
     }
     @Override
     public int hashCode() {
         return Objects.hash(getId());
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Emprestimo emprestimo = (Emprestimo) o;
+        return id == emprestimo.id;
+    }
+
     public LocalDate getDataEmprestimo() {
         return dataEmprestimo;
     }
@@ -158,7 +173,7 @@ public class Emprestimo {
     public void finalizarEmprestimo(LocalDate dataAtual) throws LivroException, LeitorException {
         this.situacao = false;
         calcularMulta(dataAtual);
-        this.livro.setDisponilidadeEmprestimo(true);
+        this.livro.setDisponibilidadeEmprestimo(true);
         DAO.getLivroDAO().update(livro);
 
     }

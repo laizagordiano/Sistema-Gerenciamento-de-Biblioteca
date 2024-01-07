@@ -1,6 +1,7 @@
 package dao.reserva;
 
 import dao.CRUD;
+import exceptions.ReservaException;
 import model.Leitor;
 import model.Livro;
 import model.Reserva;
@@ -25,7 +26,7 @@ public interface ReservaDAOInterface extends CRUD<Reserva, Exception> {
      * @param livro
      * @return
      */
-    public Reserva findReservas(Leitor leitor, Livro livro);
+    public Reserva findReservas(Leitor leitor, Livro livro) throws ReservaException;
 
     /**
      * Esse método procura e retorna uma reserva específica associada a um leitor dentro de uma lista de reservas.
@@ -33,7 +34,7 @@ public interface ReservaDAOInterface extends CRUD<Reserva, Exception> {
      * @param leitor
      * @return
      */
-    public Reserva findLeitorNaReserva(Leitor leitor);
+    public Reserva findLeitorNaReserva(Leitor leitor) throws ReservaException;
 
     /**
      * Esse método verifica se o leitor fornecido é o primeiro na lista de reservas associadas a ele.
@@ -41,7 +42,7 @@ public interface ReservaDAOInterface extends CRUD<Reserva, Exception> {
      * @param leitor
      * @return
      */
-    public boolean primeiroLeitor(Leitor leitor);
+    public boolean primeiroLeitor(Leitor leitor) throws ReservaException;
 
     /**
      * Esse método verifica se existem reservas na lista.
