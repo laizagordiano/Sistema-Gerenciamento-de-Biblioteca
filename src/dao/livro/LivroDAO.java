@@ -6,6 +6,12 @@ import model.Livro;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * A classe LivroDAO implementa a interface LivroDAOInterface e fornece métodos
+ * para realizar operações relacionadas a livros, como criação, exclusão, atualização
+ * e consulta.
+ * @author Laiza Araujo Gordiano Oliveira
+ */
 public class LivroDAO implements LivroDAOInterface {
     private ArrayList<Livro> listLivros;
     private int proximoID;

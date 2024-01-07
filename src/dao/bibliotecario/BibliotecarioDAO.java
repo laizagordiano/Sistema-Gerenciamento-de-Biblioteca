@@ -7,6 +7,12 @@ import model.Bibliotecario;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * A classe BibliotecarioDAO implementa a interface BibliotecarioDAOInterface e fornece métodos
+ * para realizar operações relacionadas a bibliotecários, como criação, exclusão, atualização
+ * e consulta.
+ * @author Laiza Araujo Gordiano Oliveira
+ */
 public class BibliotecarioDAO implements BibliotecarioDAOInterface{
     private ArrayList<Bibliotecario> listBibliotecarios;
     private int proximoID;

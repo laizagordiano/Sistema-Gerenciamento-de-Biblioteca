@@ -6,6 +6,12 @@ import model.Leitor;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * A classe LeitorDAO implementa a interface LeitorDAOInterface e fornece métodos
+ * para realizar operações relacionadas a leitores, como criação, exclusão, atualização
+ * e consulta.
+ * @author Laiza Araujo Gordiano Oliveira
+ */
 public class LeitorDAO implements LeitorDAOInterface{
     private ArrayList<Leitor> listLeitor;
     private int proximoID;

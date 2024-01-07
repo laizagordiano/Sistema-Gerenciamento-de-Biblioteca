@@ -6,6 +6,12 @@ import model.Administrador;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * A classe AdministradorDAO implementa a interface AdministradorDAOInterface e fornece métodos
+ * para realizar operações relacionadas a administradores, como criação, exclusão, atualização
+ * e consulta.
+ * @author Laiza Araujo Gordiano Oliveira
+ */
 public class AdministradorDAO implements AdministradorDAOInterface{
     private ArrayList<Administrador> listAdministradores;
     private int proximoID;

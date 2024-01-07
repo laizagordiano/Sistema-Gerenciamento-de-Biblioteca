@@ -8,6 +8,12 @@ import model.Reserva;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+/**
+ * A classe ReservaDAO implementa a interface ReservaDAOInterface e fornece métodos
+ * para realizar operações relacionadas a reservas, como criação, exclusão, atualização
+ * e consulta.
+ * @author Laiza Araujo Gordiano Oliveira
+ */
 
 public class ReservaDAO implements ReservaDAOInterface {
     private ArrayList<Reserva> listReserva;
