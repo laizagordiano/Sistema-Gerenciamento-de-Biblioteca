@@ -26,19 +26,20 @@ public class BibliotecarioDAOTest {
 
     /**
      * Esse método é utilizado para configurar o ambiente de teste antes da execução de cada teste.
+     *
      * @throws Exception
      */
     @BeforeEach
     void setUp() throws Exception {
-        jonas = DAO.getBibliotecarioDAO().create(new Bibliotecario("Jonas","0880","Bibliotecario"));
-        bianca = DAO.getBibliotecarioDAO().create(new Bibliotecario("Bianca","0080","Bibliotecario"));
-        saulo = DAO.getBibliotecarioDAO().create(new Bibliotecario("Saulo","0895","Bibliotecario"));
-        bruno = DAO.getBibliotecarioDAO().create(new Bibliotecario("Bruno","0870","Bibliotecario"));
+        jonas = DAO.getBibliotecarioDAO().create(new Bibliotecario("Jonas", "0880", "Bibliotecario"));
+        bianca = DAO.getBibliotecarioDAO().create(new Bibliotecario("Bianca", "0080", "Bibliotecario"));
+        saulo = DAO.getBibliotecarioDAO().create(new Bibliotecario("Saulo", "0895", "Bibliotecario"));
+        bruno = DAO.getBibliotecarioDAO().create(new Bibliotecario("Bruno", "0870", "Bibliotecario"));
     }
 
     /**
-     *  Esse método é utilizado para limpar o ambiente de teste após a execução de cada teste.
-     *  Ele deleta todos os registros de bibliotecarios criados durante os testes.
+     * Esse método é utilizado para limpar o ambiente de teste após a execução de cada teste.
+     * Ele deleta todos os registros de bibliotecarios criados durante os testes.
      * @throws Exception
      */
     @AfterEach
@@ -55,11 +56,11 @@ public class BibliotecarioDAOTest {
      */
     @Test
     void create() throws Exception {
-        Bibliotecario atual = DAO.getBibliotecarioDAO().create(new Bibliotecario("Neto","0094","Administrador"));
+        Bibliotecario atual = DAO.getBibliotecarioDAO().create(new Bibliotecario("Neto", "0094", "Administrador"));
         Bibliotecario esperado = DAO.getBibliotecarioDAO().findById(4);
 
-        assertEquals(esperado.getNumeroID(), atual.getNumeroID(),"Esse teste deveria passar!");
-        assertNotNull(esperado,"Esse teste deveria passar!");
+        assertEquals(esperado.getNumeroID(), atual.getNumeroID(), "Esse teste deveria passar!");
+        assertNotNull(esperado, "Esse teste deveria passar!");
 
     }
 
@@ -67,6 +68,7 @@ public class BibliotecarioDAOTest {
      * Este método verifica se a operação de deleção específica funciona corretamente.
      * Remove o bibliotecário utilizando o método delete() do DAO e, em seguida, verifica se o
      * número total de bibliotecários foi reduzido adequadamente.
+     *
      * @throws Exception
      */
 
@@ -74,20 +76,21 @@ public class BibliotecarioDAOTest {
     void delete() throws Exception {
         DAO.getBibliotecarioDAO().delete(bianca);
         int atual = DAO.getBibliotecarioDAO().findMany().size();
-        assertEquals(3,atual,"Esse teste deveria passar!");
+        assertEquals(3, atual, "Esse teste deveria passar!");
     }
 
     /**
      * Este método verifica se a operação de deletar todos os registros funciona corretamente.
      * Utiliza o método deleteMany() do DAO para remover todos os bibliotecários e, em seguida, verifica se o
      * número total de bibliotecários é zero após deletados.
+     *
      * @throws Exception
      */
     @Test
-    void deleteMany() throws Exception{
+    void deleteMany() throws Exception {
         DAO.getBibliotecarioDAO().deleteMany();
         int atual = DAO.getBibliotecarioDAO().findMany().size();
-        assertEquals(0,atual,"Esse teste deveria passar!");
+        assertEquals(0, atual, "Esse teste deveria passar!");
 
     }
 
@@ -96,6 +99,7 @@ public class BibliotecarioDAOTest {
      * Ele Modifica as informações do Bibliotecário, como nome, senha e cargo, utilizando os métodos set.
      * Utiliza o método update() do DAO para aplicar as mudanças e, em seguida, verifica se o
      * número de ID do bibliotecário atualizado é o mesmo que o esperado.
+     *
      * @throws Exception
      */
     @Test
@@ -104,31 +108,33 @@ public class BibliotecarioDAOTest {
         jonas.setSenha("0880");
         jonas.setCargo("Bibliotecario");
         Bibliotecario atual = DAO.getBibliotecarioDAO().update(jonas);
-        assertEquals(jonas.getNumeroID(), atual.getNumeroID(),"Esse teste deveria passar!");
+        assertEquals(jonas.getNumeroID(), atual.getNumeroID(), "Esse teste deveria passar!");
     }
 
     /**
      * Este método verifica se a operação de busca de todos os registros funciona corretamente.
      * Utiliza o método findMany() do DAO para obter a lista de bibliotecárioss e, em seguida, verifica se o
      * número total de bibliotecários é o mesmo que o esperado.
+     *
      * @throws Exception
      */
     @Test
     void findMany() throws Exception {
         int atual = DAO.getBibliotecarioDAO().findMany().size();
-        assertEquals(4,atual,"Esse teste deveria passar!");
+        assertEquals(4, atual, "Esse teste deveria passar!");
     }
 
     /**
      * Este método verifica se a operação de busca por ID funciona corretamente.
      * Utiliza o método findById() do DAO para obter o bibliotecário com ID 1 e, em seguida, verifica se o
      * número de ID do bibliotecário retornado é o mesmo que o esperado.
+     *
      * @throws Exception
      */
     @Test
-    void findByID() throws Exception{
-        Bibliotecario atual = DAO.getBibliotecarioDAO().findById(0);
-        assertEquals(bianca.getNumeroID(), atual.getNumeroID(),"Esse teste deveria passar!");
+    void findByID() throws Exception {
+        Bibliotecario atual = DAO.getBibliotecarioDAO().findById(1);
+        assertEquals(bianca.getNumeroID(), atual.getNumeroID(), "Esse teste deveria passar!");
     }
 
 }

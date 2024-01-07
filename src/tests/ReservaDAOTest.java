@@ -166,7 +166,7 @@ public class ReservaDAOTest {
      * Esse teste verifica se é encontrado reservas.
      */
     @Test
-    void findReservas(){
+    void findReservas() throws ReservaException{
         assertEquals(reserva1,DAO.getReservaDAO().findReservas(leitor1,livro1));
     }
 
@@ -174,7 +174,7 @@ public class ReservaDAOTest {
      * Esse teste verifica se a operação de encontrar o leitor na reserva está correta.
      */
     @Test
-    void findLeitornaReserva(){
+    void findLeitornaReserva() throws ReservaException{
         assertEquals(reserva1,DAO.getReservaDAO().findLeitorNaReserva(leitor1));
     }
 
@@ -182,7 +182,7 @@ public class ReservaDAOTest {
      * Esse teste verifica se a operação de encontrar o leitor sendo o primeiro da lista de reservas funciona.
      */
     @Test
-    void primeiroLeitor(){
+    void primeiroLeitor() throws ReservaException{
         assertTrue(DAO.getReservaDAO().primeiroLeitor(leitor1));
         assertFalse(DAO.getReservaDAO().primeiroLeitor(leitor2));
     }
@@ -199,7 +199,7 @@ public class ReservaDAOTest {
      * Esse teste verifica se a operação de encontrar se existem reservas funciona.
      */
     @Test
-    void haReservas(){
+    void haReservas() {
         assertTrue(DAO.getReservaDAO().haReservas());
     }
 
