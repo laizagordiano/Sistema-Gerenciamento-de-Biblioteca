@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -7,13 +8,13 @@ import java.util.Objects;
  * @author Laiza Araujo Gordiano Oliveira
  * @see java.util.Objects
  */
-public class Livro {
+public class Livro implements Serializable {
     private String titulo;
     private String autor;
     private String editora;
     private String ISBN;
     private Integer anoPublicacao;
-    private boolean disponilidadeEmprestimo;
+    private boolean disponibilidadeEmprestimo;
     private boolean reserva;
     private String categoria;
     private int id;
@@ -25,14 +26,25 @@ public class Livro {
         this.editora = editora;
         this.ISBN = ISBN;
         this.anoPublicacao = anoPublicacao;
-        this.disponilidadeEmprestimo = true;
+        this.disponibilidadeEmprestimo = true;
         this.reserva = false;
         this.categoria = categoria;
         this.localizacao = localizacao;
+        this.id = -1;
     }
+    @Override
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Livro livro = (Livro) o;
+        return id == livro.id;
+    }
+
     public String getTitulo() {
         return titulo;
     }
@@ -81,12 +93,12 @@ public class Livro {
         this.anoPublicacao = anoPublicacao;
     }
 
-    public boolean getDisponilidadeEmprestimo() {
-        return disponilidadeEmprestimo;
+    public boolean getDisponibilidadeEmprestimo() {
+        return disponibilidadeEmprestimo;
     }
 
-    public void setDisponilidadeEmprestimo(boolean disponilidadeEmprestimo) {
-        this.disponilidadeEmprestimo = disponilidadeEmprestimo;
+    public void setDisponibilidadeEmprestimo(boolean disponibilidadeEmprestimo) {
+        this.disponibilidadeEmprestimo = disponibilidadeEmprestimo;
     }
 
     public boolean getReserva() {
@@ -120,7 +132,7 @@ public class Livro {
                 ", editora='" + editora + '\'' +
                 ", ISBN='" + ISBN + '\'' +
                 ", anoPublicacao=" + anoPublicacao +
-                ", disponilidadeEmprestimo=" + disponilidadeEmprestimo +
+                ", disponilidadeEmprestimo=" + disponibilidadeEmprestimo +
                 ", reserva=" + reserva +
                 ", categoria='" + categoria + '\'' +
                 ", id=" + id +

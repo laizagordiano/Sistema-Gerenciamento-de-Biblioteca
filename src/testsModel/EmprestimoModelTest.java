@@ -210,7 +210,7 @@ public class EmprestimoModelTest {
      */
     @Test
     void failDisponibilidadeLivro() throws Exception {
-        livro1.setDisponilidadeEmprestimo(false);
+        livro1.setDisponibilidadeEmprestimo(false);
         DAO.getLivroDAO().update(livro1);
         try{
             DAO.getEmprestimoDAO().create(new Emprestimo(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),bia,livro1));
