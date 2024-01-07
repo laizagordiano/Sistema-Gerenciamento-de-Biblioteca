@@ -20,6 +20,7 @@ public class EmprestimoException extends Exception{
     public static final String HARESERVA = "Renovação não pode ser realizada, pois ja existe usuário na lista de reservas ";
     public static final String MULTADO = "Renovação não pode ser realizada, pois o usuário possui multa";
     public static final String ATIVOS = "Sem empréstimos ativos";
+    public static final String LEITOR_COM_ATRASO = "Possui livros atrasados";
     public static final String SEM_ATRASADOS = "Não existe livros atrasados";
 
     public EmprestimoException(String mensagem){
