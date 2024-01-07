@@ -1,12 +1,13 @@
 package dao;
 
 
-import dao.administrador.AdministradorDAO;
-import dao.bibliotecario.BibliotecarioDAO;
-import dao.emprestimo.EmprestimoDAO;
-import dao.leitor.LeitorDAO;
-import dao.livro.LivroDAO;
-import dao.reserva.ReservaDAO;
+import dao.administrador.AdministradorDAOFile;
+import dao.bibliotecario.BibliotecarioDAOFile;
+import dao.emprestimo.EmprestimoDAOFile;
+import dao.leitor.LeitorDAOFile;
+import dao.livro.LivroDAOFile;
+import dao.reserva.ReservaDAOFile;
+
 /**
  * Classe responsável por implementar o Padrão Singleton tem como definição garantir que uma classe,
  * tenha apenas uma instância de si mesma e que forneça um ponto global de acesso a ela;
@@ -14,52 +15,52 @@ import dao.reserva.ReservaDAO;
  * @author Laiza Araujo Gordiano Oliveira
  */
 public class DAO {
-    private static AdministradorDAO administradorDAOinstancia;
-    private static BibliotecarioDAO bibliotecarioDAOinstancia;
-    private static EmprestimoDAO emprestimoDAOinstancia;
-    private static LivroDAO livroDAOinstancia;
-    private static LeitorDAO leitorDAOinstancia;
-    private static ReservaDAO reservaDAOinstancia;
+    private static AdministradorDAOFile administradorDAOinstancia;
+    private static BibliotecarioDAOFile bibliotecarioDAOinstancia;
+    private static EmprestimoDAOFile emprestimoDAOinstancia;
+    private static LivroDAOFile livroDAOinstancia;
+    private static LeitorDAOFile leitorDAOinstancia;
+    private static ReservaDAOFile reservaDAOinstancia;
 
-    public static AdministradorDAO getAdministradorDAO() {
+    public static AdministradorDAOFile getAdministradorDAO() {
         if(administradorDAOinstancia == null){
-            administradorDAOinstancia = new AdministradorDAO();
+            administradorDAOinstancia = new AdministradorDAOFile();
         }
         return administradorDAOinstancia;
     }
 
-    public static BibliotecarioDAO getBibliotecarioDAO() {
+    public static BibliotecarioDAOFile getBibliotecarioDAO() {
         if(bibliotecarioDAOinstancia == null){
-            bibliotecarioDAOinstancia = new BibliotecarioDAO();
+            bibliotecarioDAOinstancia = new BibliotecarioDAOFile();
         }
         return bibliotecarioDAOinstancia;
     }
 
-    public static EmprestimoDAO getEmprestimoDAO() {
+    public static EmprestimoDAOFile getEmprestimoDAO() {
         if(emprestimoDAOinstancia == null){
-            emprestimoDAOinstancia = new EmprestimoDAO();
+            emprestimoDAOinstancia = new EmprestimoDAOFile();
         }
         return emprestimoDAOinstancia;
     }
 
-    public static LivroDAO getLivroDAO() {
+    public static LivroDAOFile getLivroDAO() {
         if(livroDAOinstancia == null){
-            livroDAOinstancia = new LivroDAO();
+            livroDAOinstancia = new LivroDAOFile();
 
         }
         return livroDAOinstancia;
     }
 
-    public static LeitorDAO getLeitorDAO() {
+    public static LeitorDAOFile getLeitorDAO() {
         if (leitorDAOinstancia == null){
-            leitorDAOinstancia = new LeitorDAO();
+            leitorDAOinstancia = new LeitorDAOFile();
         }
         return leitorDAOinstancia;
     }
 
-    public static ReservaDAO getReservaDAO() {
+    public static ReservaDAOFile getReservaDAO() {
         if (reservaDAOinstancia == null){
-            reservaDAOinstancia = new ReservaDAO();
+            reservaDAOinstancia = new ReservaDAOFile();
         }
         return reservaDAOinstancia;
     }
