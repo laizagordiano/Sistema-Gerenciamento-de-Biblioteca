@@ -6,7 +6,12 @@ import model.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-
+/**
+ * A classe EmprestimoDAO implementa a interface EmprestimoDAOInterface e fornece métodos
+ * para realizar operações relacionadas a empréstimos, como criação, exclusão, atualização
+ * e consulta.
+ * @author Laiza Araujo Gordiano Oliveira
+ */
 public class EmprestimoDAO implements EmprestimoDAOInterface {
     private ArrayList<Emprestimo> listEmprestimos;
     private int proximoID;
@@ -162,17 +167,17 @@ public class EmprestimoDAO implements EmprestimoDAOInterface {
         return numDeAtraso;
     }
 
-    public Boolean verificaAtrasoDoLeitor(Leitor leitor) {
-        LocalDate dataHoje = LocalDate.now();
+    public Boolean verificaAtrasoDoLeitor(Leitor leitor, String dataHoje) {
+        DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate newDate = LocalDate.parse(dataHoje, dataFormatada);
         for (Emprestimo emprestimo : listEmprestimos) {
             if (emprestimo.getLeitor() == leitor
-                    && dataHoje.isAfter(emprestimo.getDataDevolucao())
+                    && newDate.isAfter(emprestimo.getDataDevolucao())
                     && emprestimo.isSituacao()) {
                 return true;
             }
         }
         return false; // indica que o leitor não tem atrasos
     }
-
 
 }
