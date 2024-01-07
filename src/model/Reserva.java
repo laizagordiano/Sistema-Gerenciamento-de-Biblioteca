@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Objects;
  * @author Laiza Araujo Gordiano Oliveira
  * @see java.util.Objects
  */
-public class Reserva {
+public class Reserva implements Serializable {
     private Leitor leitor;
     private Livro livro;
     private int id;
