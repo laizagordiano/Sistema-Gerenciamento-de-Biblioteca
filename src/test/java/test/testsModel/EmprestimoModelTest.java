@@ -62,7 +62,7 @@ public class EmprestimoModelTest {
         DAO.getLeitorDAO().deleteMany();
         DAO.getLivroDAO().deleteMany();
         DAO.getEmprestimoDAO().deleteMany();
-
+        DAO.getReservaDAO().deleteMany();
     }
 
     /**
