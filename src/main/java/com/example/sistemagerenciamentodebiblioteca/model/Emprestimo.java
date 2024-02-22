@@ -67,7 +67,7 @@ public class Emprestimo implements Serializable {
         this.situacao = true;
         this.renovou = 0;
         this.id = -1;
-        livro.setDisponibilidadeEmprestimo(true);
+        livro.setDisponibilidadeEmprestimo(false);
         DAO.getLivroDAO().update(livro);
         DAO.getLeitorDAO().update(leitor);
     }
