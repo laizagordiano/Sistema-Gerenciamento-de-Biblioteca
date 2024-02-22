@@ -110,7 +110,7 @@ public class ReservaDAOFile implements ReservaDAOInterface{
                 return reserva;
             }
         }
-        throw new ReservaException(ReservaException.PROCURAR);
+        return null;
     }
 
     @Override

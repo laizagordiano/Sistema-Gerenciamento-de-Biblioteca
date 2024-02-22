@@ -113,6 +113,17 @@ public class EmprestimoDAOFile implements EmprestimoDAOInterface{
         }
         return emprestimoAtivoDoLeitor;
     }
+    public ArrayList<Emprestimo> findEmprestimosUser(Leitor leitor) {
+        ArrayList<Emprestimo> listEmprestimos = findMany();
+        ArrayList<Emprestimo> emprestimoAtivoDoLeitor = new ArrayList<>();
+        for (Emprestimo emprestimo : listEmprestimos) {
+            if (emprestimo.getLeitor().getNumeroID() == leitor.getNumeroID()) {
+                emprestimoAtivoDoLeitor.add(emprestimo);
+            }
+        }
+        return emprestimoAtivoDoLeitor;
+    }
+
 
     @Override
     public List<Emprestimo> findEmprestimoAtivo() throws EmprestimoException {
@@ -123,10 +134,18 @@ public class EmprestimoDAOFile implements EmprestimoDAOInterface{
                 emprestimoAtivo.add(emprestimo);
             }
         }
-        if (emprestimoAtivo.isEmpty()) {
-            throw new EmprestimoException(EmprestimoException.ATIVOS);
-        }
         return emprestimoAtivo;
+    }
+    public Emprestimo encontraPorIdDoLivro(int id) throws EmprestimoException {
+        ArrayList<Emprestimo> listEmprestimos = findMany();
+        for (Emprestimo emprestimo : listEmprestimos ){
+            if (Objects.equals(emprestimo.getLivro().getId(), id)){
+                if (emprestimo.isSituacao()) {
+                    return emprestimo;
+                }
+            }
+        }
+        throw new EmprestimoException(EmprestimoException.PROCURAR);
     }
 
     @Override
@@ -180,9 +199,9 @@ public class EmprestimoDAOFile implements EmprestimoDAOInterface{
                 numDeAtraso++;
             }
         }
-        if (numDeAtraso == 0) {
+        /*if (numDeAtraso == 0) {
             throw new EmprestimoException(EmprestimoException.SEM_ATRASADOS);
-        }
+        }*/
         return numDeAtraso;
     }
     public Boolean verificaAtrasoDoLeitor(Leitor leitor, String dataHoje) {
