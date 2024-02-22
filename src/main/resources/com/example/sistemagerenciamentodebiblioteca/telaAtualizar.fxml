@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.example.sistemagerenciamentodebiblioteca.controller.TelaAtualizar">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B0C4DE;">
+         <children>
+            <Text layoutX="154.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Atualização das informações do livro">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="41.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id do livro:" wrappingWidth="75.296875">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="textId" layoutX="35.0" layoutY="84.0" onAction="#textIdAction" promptText="digite o id" />
+            <HBox fx:id="hBox" layoutX="35.0" layoutY="116.0" prefHeight="43.0" prefWidth="281.0">
+               <children>
+                  <MenuButton fx:id="menuBtn" mnemonicParsing="false" onAction="#menuBtnAction" style="-fx-background-color: #4682B4;" text="MenuButton">
+                    <items>
+                        <RadioMenuItem fx:id="idAutor" mnemonicParsing="false" onAction="#idAutorAction" text="Autor" />
+                        <RadioMenuItem fx:id="idTitulo" mnemonicParsing="false" onAction="#idTituloAction" text="Título" />
+                        <RadioMenuItem fx:id="idEditora" mnemonicParsing="false" onAction="#idEditoraAction" text="Editora" />
+                        <RadioMenuItem fx:id="idCategoria" mnemonicParsing="false" onAction="#idCategoriaAction" text="Categoria" />
+                        <RadioMenuItem fx:id="idAnoPublicacao" mnemonicParsing="false" onAction="#idAnoPublicacaoAction" text="Ano de Publicação" />
+                        <RadioMenuItem fx:id="idIsbn" mnemonicParsing="false" onAction="#idIsbnAction" text="ISBN" />
+                        <RadioMenuItem fx:id="idLocalizacao" mnemonicParsing="false" onAction="#idLocalizacaoAction" text="Localização" />
+                    </items>
+                  </MenuButton>
+                  <TextField fx:id="textInformacao" onAction="#textInformacaoAction" prefHeight="25.0" prefWidth="164.0" />
+               </children>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+            </HBox>
+            <ListView fx:id="listView" layoutX="34.0" layoutY="167.0" prefHeight="91.0" prefWidth="545.0" />
+            <Button fx:id="btnAtualizar" layoutX="281.0" layoutY="319.0" mnemonicParsing="false" onAction="#btnAtualizarAction" style="-fx-background-color: #4682B4;" text="Atualizar" />
+            <Button fx:id="btnBack" layoutX="545.0" layoutY="13.0" mnemonicParsing="false" onAction="#btnBackAction" style="-fx-background-color: #4682B4;" text="Back" />
+            <Button fx:id="btnBusca" layoutX="184.0" layoutY="84.0" mnemonicParsing="false" onAction="#btnBuscaAction" style="-fx-background-color: #4682B4;" text="🔎" />
+         </children>
+      </Pane>
+   </children>
+</GridPane>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemagerenciamentodebiblioteca.controller.TelaCadastroLivro">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Pane fx:id="idPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B0C4DE;">
+         <children>
+            <Text fx:id="textCadastroLivro" layoutX="26.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastro de Livro" wrappingWidth="243.490234375">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Text>
+            <VBox layoutX="33.0" layoutY="54.0" prefHeight="328.0" prefWidth="203.0">
+               <children>
+                  <Text fx:id="textTitulo" strokeType="OUTSIDE" strokeWidth="0.0" text="Título do Livro:">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Text>
+                  <TextField fx:id="caixaTextTitulo" onAction="#caixaTextTituloAction" promptText="Título do livro" />
+                  <Text fx:id="textAutor" strokeType="OUTSIDE" strokeWidth="0.0" text="Autor (a):">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Text>
+                  <TextField fx:id="caixaTextAutor" onAction="#caixaTextAutorAction" promptText="Autor(a)" />
+                  <Text fx:id="textEditora" strokeType="OUTSIDE" strokeWidth="0.0" text="Editora:">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Text>
+                  <TextField fx:id="caixaTextEditora" onAction="#caixaTextEditoraAction" promptText="Editora" />
+                  <Text fx:id="textIsbn" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN:">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Text>
+                  <TextField fx:id="caixaTextIsbn" onAction="#caixaTextIsbnAction" promptText="ISBN" />
+                  <Text fx:id="textCategoria" strokeType="OUTSIDE" strokeWidth="0.0" text="Categoria:">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Text>
+                  <TextField fx:id="caixaTextCategoria" onAction="#caixaTextCategoriaAction" promptText="Categoria" />
+                  <Text fx:id="textAnoPublicacao" strokeType="OUTSIDE" strokeWidth="0.0" text="Ano de publicação:">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Text>
+                  <TextField fx:id="caixaTextAnoPublicacao" onAction="#caixaTextAnoPublicacaoAction" promptText="Ano de publicação" />
+                  <Text fx:id="textLocalizacao" strokeType="OUTSIDE" strokeWidth="0.0" text="Localização:">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Text>
+                  <TextField fx:id="caixaTextLocalizacao" onAction="#caixaTextLocalizacaoAction" promptText="Localização" />
+               </children>
+            </VBox>
+            <Button fx:id="btnCadastro" layoutX="519.0" layoutY="361.0" mnemonicParsing="false" onAction="#bntCadastroAction" style="-fx-background-color: #4682B4;" text="Cadastrar" />
+            <Button fx:id="btnBack" layoutX="544.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnBackAction" style="-fx-background-color: #4682B4;" text="Back" />
+         </children>
+      </Pane>
+   </children>
+</GridPane>

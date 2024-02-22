@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemagerenciamentodebiblioteca.controller.TelaCadastroFuncionario">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B0C4DE;">
+         <children>
+            <Text layoutX="24.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastrar Funcionário">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <VBox layoutX="24.0" layoutY="50.0" prefHeight="145.0" prefWidth="273.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome" />
+                  <TextField fx:id="textNome" onAction="#textNomeAction" promptText="Nome do Funcionário" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Senha">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Text>
+                  <TextField fx:id="textSenha" onAction="#textSenhaAction" promptText="Senha" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmar Senha">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Text>
+                  <TextField fx:id="textConfirmarSenha" onAction="#textConfirmarSenhaAction" promptText="Confirmar Senha" />
+               </children>
+            </VBox>
+            <Button fx:id="btnCadastrar" layoutX="120.0" layoutY="247.0" mnemonicParsing="false" onAction="#btnCadastrarAction" style="-fx-background-color: #4682B4;" text="Cadastrar" />
+            <HBox fx:id="hBoxbtn" layoutX="24.0" layoutY="201.0" prefHeight="27.0" prefWidth="273.0" spacing="30.0">
+               <children>
+                  <RadioButton fx:id="btnAdministrador" mnemonicParsing="false" onAction="#btnAdministradorAction" text="Administrador" />
+                  <RadioButton fx:id="btnBibliotecario" mnemonicParsing="false" onAction="#btnBibliotecarioAction" text="Bibliotecário" />
+               </children>
+            </HBox>
+            <Button fx:id="btnBack" layoutX="545.0" layoutY="15.0" mnemonicParsing="false" onAction="#btnBackAction" style="-fx-background-color: #4682B4;" text="Back" />
+         </children>
+      </Pane>
+   </children>
+</GridPane>

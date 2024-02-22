@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemagerenciamentodebiblioteca.controller.TelaBibliotecario">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B0C4DE;">
+         <children>
+            <Text layoutX="27.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bibliotecário" wrappingWidth="166.783203125">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+            <VBox layoutX="35.0" layoutY="56.0" prefHeight="336.0" prefWidth="257.0" spacing="10.0">
+               <children>
+                  <Button fx:id="btnRegistrarNovoLivro" mnemonicParsing="false" onAction="#btnRegistrarNovoLivroAction" prefHeight="29.0" prefWidth="150.0" style="-fx-background-color: #4682B4;" text="Registrar novo livro">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="btnRegistrarEmprestimo" mnemonicParsing="false" onAction="#btnRegistrarEmprestimoAction" prefHeight="29.0" prefWidth="150.0" style="-fx-background-color: #4682B4;" text="Registrar empréstimos" />
+                  <Button fx:id="btnRegistrarDevolucao" mnemonicParsing="false" onAction="#btnRegistrarDevolucaoAction" prefHeight="29.0" prefWidth="150.0" style="-fx-background-color: #4682B4;" text="Registrar devolução" />
+                  <Button fx:id="btnPesquisarLivros" mnemonicParsing="false" onAction="#btnPesquisarLivrosAction" prefHeight="29.0" prefWidth="150.0" style="-fx-background-color: #4682B4;" text="Pesquisar Livros" />
+               </children>
+            </VBox>
+            <Button fx:id="btnLogOut" layoutX="541.0" layoutY="364.0" mnemonicParsing="false" onAction="#btnLogOutAction" style="-fx-background-color: #4682B4;" text="LogOut" />
+         </children>
+      </Pane>
+   </children>
+</GridPane>
