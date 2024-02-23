@@ -20,6 +20,8 @@ public class Livro implements Serializable {
     private int id;
     private String localizacao;
 
+    private boolean status;
+
     public Livro(String titulo, String autor, String editora, String ISBN, Integer anoPublicacao, String categoria, String localizacao) {
         this.titulo = titulo;
         this.autor = autor;
@@ -28,6 +30,7 @@ public class Livro implements Serializable {
         this.anoPublicacao = anoPublicacao;
         this.disponibilidadeEmprestimo = true;
         this.reserva = false;
+        this.status = true;
         this.categoria = categoria;
         this.localizacao = localizacao;
         this.id = -1;
@@ -43,6 +46,14 @@ public class Livro implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Livro livro = (Livro) o;
         return id == livro.id;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public String getTitulo() {

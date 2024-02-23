@@ -68,7 +68,7 @@ public class TelaReserva {
     }
 
     private void livroDisponivel(Livro livro) throws LivroException {
-        if (DAO.getLivroDAO().findById(livro.getId()).getDisponibilidadeEmprestimo()){
+        if (DAO.getLivroDAO().findById(livro.getId()).isStatus()){
             informationAlert("Error", "Livro disponível para empréstimos");
             throw new IllegalArgumentException();
         }

@@ -67,9 +67,11 @@ public class Emprestimo implements Serializable {
         this.situacao = true;
         this.renovou = 0;
         this.id = -1;
-        livro.setDisponibilidadeEmprestimo(false);
+        livro.setDisponibilidadeEmprestimo(true);
+        livro.setStatus(false);
         DAO.getLivroDAO().update(livro);
         DAO.getLeitorDAO().update(leitor);
+
     }
     @Override
     public int hashCode() {
